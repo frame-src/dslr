@@ -2,7 +2,7 @@ from core.utils.dataset_operation import clean_data_and_normalize
 import copy
 import math
 
-houses = ["Gryffindor", "Hufflepuff", "Ravenclaw", "Slytherin"]
+houses = ["Gryffindor", "Slytherin", "Ravenclaw", "Hufflepuff"]
 learning_rate = 0.001
 epochs = 1000
 

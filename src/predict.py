@@ -43,7 +43,7 @@ def predict(X, weights):
 
 
 if __name__ == "__main__":
-    dataset = './data/dataset_test.csv'
+    dataset = './data/dataset_train.csv'
     array_of_names = ["Hogwarts House","Index", "First Name", "Last Name", "Birthday", "Best Hand", "Arithmancy", "Care of Magical Creatures"]
     clean_data, header = clean_data_and_normalize(dataset, array_of_names)
     print(len(clean_data))
@@ -56,8 +56,13 @@ if __name__ == "__main__":
         trained_models = json.load(f)
         tags = trained_models[0]
         weights = trained_models[1:]
+    houses = ["Gryffindor", "Slytherin", "Ravenclaw", "Hufflepuff"]
+    print(houses)
     for row in clean_data:
         result = predict(row, weights)
-        print(result)
-
-
+        i = 0
+        while i < 4:
+            if result[i] == 1:
+                print(houses[i])
+            i = i + 1
+        # print(result)
