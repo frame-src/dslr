@@ -3,8 +3,8 @@ import copy
 import math
 
 HOUSES = ["Gryffindor", "Slytherin", "Ravenclaw", "Hufflepuff"]
-LEARNING_RATE = 0.0001
-EPOCHS = 10000
+LEARNING_RATE = 0.001
+EPOCHS = 100
 
 def prep_data_for_each_house(data, house):
     # data = [row for row in data if row[0] == house row[0] = 1 else row[0] = 0]
@@ -47,7 +47,7 @@ def gradient_descend(row, y, weights, learning_rate):
     weights[0] = weights[0] - learning_rate * error
     for element in range(1, len(row)):
         gradient = error * row[element]
-        weights[element] = weights[element] - learning_rate * gradient
+        weights[element] = gradient
     return weights
 
 
@@ -57,11 +57,12 @@ def train_for_each_house(data):
         house_data = prep_data_for_each_house(data, house)
         weights = [0.0 for _ in range(len(data[0]))]
         for _ in range(EPOCHS):
+            temp_weight = [0.0 for _ in range(len(data[0]))]
             for row in house_data:
                 y = row[0]  # Target value
-                weights = gradient_descend(row, y, weights, LEARNING_RATE)
-                for i in range(len(weights)):
-                    weights[i] = weights[i] / len(house_data)
+                temp_weight += gradient_descend(row, y, weights, LEARNING_RATE)
+            for i in range(len(weights)):
+                weights[i] += temp_weight[i] / len(house_data) * LEARNING_RATE
         model.append(weights)
     return model
 
