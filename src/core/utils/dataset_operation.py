@@ -85,5 +85,3 @@ def clean_data_and_normalize(dataset, headers_to_remove):
     new_dataset = remove_empty_rows(cleaned_dataset)
     normalize_data(new_dataset, header)
     return new_dataset, header
-
-
